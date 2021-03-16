@@ -11,15 +11,15 @@ export class ProductsService {
     return this.productsRepository.getProductPrice(productId);
   }
 
-  async getProductFromArray(items: string[]): Promise<ProductGetDTO[]> {
+  async getProductFromArray(items: string[]): Promise<Record<string, number>> {
     return await items.reduce(async (prevPromise, productId): Promise<any> => {
       try {
-        const acc = await prevPromise;
-        const product = await this.getProductById(productId as string);
-        return Promise.resolve([product, ...acc]);
+        let acc = await prevPromise;
+        const { id, price } = (await this.getProductById(productId as string)) || {};
+        return Promise.resolve(id && price ? (acc = { ...acc, [id]: price }) : acc);
       } catch (error) {
         this.logger.error(error);
       }
-    }, Promise.resolve([]) as any);
+    }, Promise.resolve({}) as any);
   }
 }

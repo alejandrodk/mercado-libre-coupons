@@ -4,6 +4,6 @@ export class CouponsGetDTO {
 
   constructor(items_id: string[], amount: number) {
     this.items = items_id;
-    this.amount = amount;
+    this.amount = Number(amount.toFixed(2));
   }
 }

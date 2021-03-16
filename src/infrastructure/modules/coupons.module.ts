@@ -4,6 +4,6 @@ import { CouponsService } from '../../domain/services/coupons.service';
 @Module({
   imports: [],
   providers: [CouponsService],
-  exports: [],
+  exports: [CouponsService],
 })
 export class CouponsModule {}
