@@ -4,6 +4,7 @@ import { AppController } from '../../application/controllers';
 import { configuration } from '../config';
 import { validate } from '../config/env.validation';
 import { CouponsModule } from './coupons.module';
+import { ProductsModule } from './products.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { CouponsModule } from './coupons.module';
       expandVariables: true,
     }),
     CouponsModule,
+    ProductsModule,
   ],
   providers: [],
   controllers: [AppController],
