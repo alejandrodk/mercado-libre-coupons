@@ -23,6 +23,7 @@
   },
   "rules": {
     "prettier/prettier": "error",
+    "endOfLine": 0,
     "max-len": [
       "error",
       {

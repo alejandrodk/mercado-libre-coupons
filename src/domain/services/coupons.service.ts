@@ -17,7 +17,7 @@ export class CouponsService {
       if (!totalProducts || coupon < cheappestProduct) return 0;
 
       if (currentValue > coupon) return getTotalFromProducts(coupon, values, totalProducts - 1);
- 
+
       const totalWithProduct = currentValue + getTotalFromProducts(coupon - currentValue, values, totalProducts - 1);
       const totalWithoutProduct = getTotalFromProducts(coupon, values, totalProducts - 1);
       return Math.max(totalWithProduct, totalWithoutProduct);
