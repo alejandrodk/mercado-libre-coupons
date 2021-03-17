@@ -16,14 +16,17 @@ module.exports = {
   coverageProvider: 'v8',
   collectCoverageFrom: [
     'src/**/*.ts',
+    'src/application/controllers/*',
+    'src/application/pipes',
+    '!src/**/index.ts',
     '!src/main.ts',
     '!src/**/*.config.ts',
-    '!src/application/controllers/*',
     '!src/application/interceptors/*',
     '!src/domain/entities/**',
     '!src/domain/interfaces/*',
     '!src/domain/modules/*',
     '!src/infrastructure/**',
+    '!src/domain/helpers/env.helpers.ts',
   ],
   coverageThreshold: {
     global: {
