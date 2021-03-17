@@ -4,7 +4,8 @@ import { removeExpensiveProducts } from '../../domain/helpers';
 import { CouponsService } from '../../domain/services/coupons.service';
 import { ProductsService } from '../../domain/services/products.service';
 import { CouponsGetDTO } from '../dtos';
-import { PayloadToDtoPipe } from '../pipes/payloadToDto.pipe';
+import { PayloadToDtoPipe, PayloadValidationPipe } from '../pipes';
+import { PayloadSchema } from '../../domain/schemas';
 
 @Controller()
 export class AppController {
@@ -15,7 +16,7 @@ export class AppController {
   }
 
   @Post('/coupons')
-  //@UsePipes(PayloadToDtoPipe)
+  @UsePipes(new PayloadValidationPipe(PayloadSchema), PayloadToDtoPipe)
   async getProductsFromCoupon(@Body() { items, amount }: CouponsGetDTO): Promise<any> {
     const productsList = await this.productsService.getProductFromArray(items);
     const products = removeExpensiveProducts(productsList, amount);
