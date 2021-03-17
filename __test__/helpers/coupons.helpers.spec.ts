@@ -1,30 +1,30 @@
-import { random } from 'faker';
-import { removeCurrentProduct, removeExpensiveProducts } from '../../src/domain/helpers';
+/* eslint-disable prettier/prettier */
+import { getCheappestProductValue, removeExpensiveProducts } from '../../src/domain/helpers';
 
 describe('Test coupons helpers functions', () => {
-  describe('[removeExpensiveItems', () => {
+  let fakeObject: Record<string, number>;
+
+  beforeEach(() => {
+    fakeObject = {
+      prop1: 100,
+      prop2: 200,
+      prop3: 300,
+    };
+  });
+
+  describe('[removeExpensiveItems]', () => {
     it('Should remove item if its price is higher than the coupon', () => {
-      const obj = {
-        prop1: 100,
-        prop2: 200,
-        prop3: 300,
-      };
-      const result = removeExpensiveProducts(obj, 200);
+      const result = removeExpensiveProducts(fakeObject, 200);
 
       expect(result).not.toHaveProperty('prop3');
     });
   });
 
-  describe('[removeCurrentProduct]', () => {
-    it('Should remove the last property of an object', () => {
-      const obj = {
-        prop1: random.number(),
-        prop2: random.number(),
-      };
+  describe('[getCheappestProductValue]', () => {
+    it('Should return the value of the cheappest product', () => {
+      const result = getCheappestProductValue(fakeObject);
 
-      const result = removeCurrentProduct(obj);
-
-      expect(result).not.toHaveProperty('prop2');
+      expect(result).toBe(100);
     });
   });
 });

@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { getCheappestProductValue } from '../helpers';
 
 @Injectable()
 export class CouponsService {
@@ -8,19 +9,23 @@ export class CouponsService {
     const itemsValues = Object.values(items);
     const itemsQuantity = itemsKeys.length;
 
-    const getTotalFromProducts = (coupon: number, values: number[], quantity: number): any => {
-      const lastItemValue = values[quantity - 1];
+    const cheappestProduct = getCheappestProductValue(items);
 
-      if (!quantity || !coupon) return 0;
+    const getTotalFromProducts = (coupon: number, values: number[], totalProducts: number): any => {
+      const currentValue = values[totalProducts - 1];
 
-      if (lastItemValue > coupon) return getTotalFromProducts(coupon, values, quantity - 1);
+      if (!totalProducts || coupon < cheappestProduct) return 0;
 
-      const totalWithProduct = lastItemValue + getTotalFromProducts(coupon - lastItemValue, values, quantity - 1);
-      const totalWithoutProduct = getTotalFromProducts(coupon, values, quantity - 1);
-
+      if (currentValue > coupon) return getTotalFromProducts(coupon, values, totalProducts - 1);
+ 
+      const totalWithProduct = currentValue + getTotalFromProducts(coupon - currentValue, values, totalProducts - 1);
+      const totalWithoutProduct = getTotalFromProducts(coupon, values, totalProducts - 1);
       return Math.max(totalWithProduct, totalWithoutProduct);
     };
 
-    return getTotalFromProducts(couponAmount, itemsValues, itemsQuantity);
+    return {
+      items_ids: [],
+      total: getTotalFromProducts(couponAmount, itemsValues, itemsQuantity),
+    };
   }
 }

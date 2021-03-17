@@ -20,6 +20,6 @@ export class AppController {
     const productsList = await this.productsService.getProductFromArray(items);
     const products = removeExpensiveProducts(productsList, amount);
     const result = this.couponsService.calculate(products, amount);
-    return {result, productsList};
+    return {result, products};
   }
 }

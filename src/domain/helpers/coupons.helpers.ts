@@ -8,11 +8,6 @@ export function removeExpensiveProducts(items: Record<string, number>, maxPrice:
     }, {} as any);
 }
 
-export function removeCurrentProduct(items: Record<string, number>): Record<string, number> {
-  const values = Object.entries(items);
-  return values.reduce((acc, curr) => {
-    const [key, value] = curr;
-    if (key !== values[values.length - 1][0]) acc[key] = value;
-    return acc;
-  }, {} as any);
+export function getCheappestProductValue(items: Record<string, number>): number {
+  return Object.values(items).sort((a, b) => a - b)[0];
 }

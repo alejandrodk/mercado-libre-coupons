@@ -8,3 +8,5 @@ docker-compose.override.yml
 # Jest coverage files
 coverage/
 coverage/**
+
+tmp

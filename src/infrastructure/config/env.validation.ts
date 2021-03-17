@@ -4,6 +4,11 @@ import { validateSync, IsNotEmpty } from 'class-validator';
 class EnvironmentVariables {
   @IsNotEmpty()
   PORT: string;
+
+  @IsNotEmpty()
+  REDIS_HOST: string;
+  @IsNotEmpty()
+  REDIS_PORT: string;
 }
 
 export function validate(config: Record<string, unknown>): EnvironmentVariables {
