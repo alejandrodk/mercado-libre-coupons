@@ -1,3 +1,5 @@
+// Transform received data from body request in a valid DTO object.
+// https://docs.nestjs.com/pipes
 import { ArgumentMetadata, Injectable, PipeTransform } from '@nestjs/common';
 import { CouponsGetDTO } from '../dtos';
 

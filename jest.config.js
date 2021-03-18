@@ -18,6 +18,7 @@ module.exports = {
     'src/**/*.ts',
     'src/application/controllers/*',
     'src/application/pipes',
+    '!src/application/dtos/*',
     '!src/**/index.ts',
     '!src/main.ts',
     '!src/**/*.config.ts',

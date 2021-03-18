@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Body, Controller, HttpException, HttpStatus, Post, UsePipes } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpException, HttpStatus, Post, UsePipes } from '@nestjs/common';
 import { CouponsService } from '../../domain/services/coupons.service';
 import { ProductsService } from '../../domain/services/products.service';
 import { CouponsGetDTO, CouponsSendDTO } from '../dtos';
@@ -11,7 +11,8 @@ import { HttpMessages } from '../../domain/enums/http.enums';
 export class AppController {
   constructor(private productsService: ProductsService, private couponsService: CouponsService) {}
 
-  @Post('/coupons')
+  @Post('/coupon')
+  @HttpCode(HttpStatus.OK)
   @UsePipes(new PayloadValidationPipe(PayloadSchema), PayloadToDtoPipe)
   async getProductsFromCoupon(@Body() { items, amount }: CouponsGetDTO): Promise<any> {
     const productsList = await this.productsService.getProductFromArray(items);
