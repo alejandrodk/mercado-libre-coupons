@@ -126,3 +126,22 @@ http://localhost:5000/coupons
 |[Dotenv]()|Cargar variables de entorno
 |[Dotenv-flow](https://www.npmjs.com/package/dotenv-flow) / [Dotenv-expand](https://www.npmjs.com/package/dotenv-expand)| Utilizar archivos .env según entorno
 |[class-transformer]() / [class-validator]()| Validar propiedades de clases
+
+# Test Coverage
+```sh
+File                     | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s
+-------------------------|---------|----------|---------|---------|-------------------
+All files                |  98.72 |    94.12 |     100 |   98.72 |
+ application/controllers |     100 |      100 |     100 |     100 |
+  app.controller.ts      |     100 |      100 |     100 |     100 |
+ application/pipes       |     100 |      100 |     100 |     100 |
+  payloadToDto.pipe.ts   |     100 |      100 |     100 |     100 |
+  validation.pipe.ts     |     100 |      100 |     100 |     100 |
+ domain/enums            |     100 |      100 |     100 |     100 |
+  http.enums.ts          |     100 |      100 |     100 |     100 |
+ domain/schemas          |     100 |      100 |     100 |     100 |
+  payload.schema.ts      |     100 |      100 |     100 |     100 |
+ domain/services         |   97.65 |     91.3 |     100 |   97.65 |
+  coupons.service.ts     |     100 |    85.71 |     100 |     100 | 16
+  products.service.ts    |   95.65 |    93.75 |     100 |   95.65 | 22-23
+```
