@@ -1,9 +1,9 @@
 export class CouponsSendDTO {
-  public items_id: string[];
+  public items_ids: string[];
   public total: number;
 
   constructor(items: string[], total: number) {
-    this.items_id = items;
+    this.items_ids = items;
     this.total = total;
   }
 }

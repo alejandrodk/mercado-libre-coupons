@@ -3,7 +3,6 @@ import { CouponsService } from '../../src/domain/services';
 
 describe('Coupons Service', () => {
   let service: CouponsService;
-  let fakeObject: Record<string, number>;
 
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({

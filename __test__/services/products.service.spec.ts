@@ -4,9 +4,11 @@ import { ProductGetDTO } from '../../src/application/dtos/productsGet.dto';
 import { ProductsService } from '../../src/domain/services';
 import { ProductRepository } from '../../src/infrastructure/repositories/products.repository';
 import { random } from 'faker';
+import { TCouponProduct } from '../../src/domain/interfaces/coupons.interfaces';
 
 describe('Products Service', () => {
   let service: ProductsService;
+  let fakeObject: TCouponProduct;
 
   beforeAll(async () => {
     const ProductsRepositoryMock = {
@@ -24,6 +26,11 @@ describe('Products Service', () => {
     }).compile();
 
     service = module.get<ProductsService>(ProductsService);
+    fakeObject = {
+      prop1: 100,
+      prop2: 200,
+      prop3: 300,
+    };
   });
 
   describe('Service status', () => {
@@ -60,6 +67,12 @@ describe('Products Service', () => {
       const result = Object.keys(productsMap);
 
       expect(result).toHaveLength(2);
+    });
+
+    it('Should remove item if its price is higher than the coupon', () => {
+      const result = service.removeExpensiveProducts(fakeObject, 200);
+
+      expect(result).not.toHaveProperty('prop3');
     });
   });
 });
