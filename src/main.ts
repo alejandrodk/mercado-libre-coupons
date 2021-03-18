@@ -10,8 +10,8 @@ async function bootstrap() {
   app.use(morgan('dev'));
 
   const configService = app.get(ConfigService);
-  const NODE_PORT = configService.get('NODE_PORT');
+  const PORT = configService.get('PORT');
 
-  await app.listen(NODE_PORT, () => Logger.log('HTTP Service is listening', 'App'));
+  await app.listen(PORT || 3000, () => Logger.log('HTTP Service is listening', 'App'));
 }
 bootstrap();
