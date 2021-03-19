@@ -1,28 +1,32 @@
 import { CACHE_MANAGER, HttpService, HttpStatus, Inject, Injectable, Logger } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { Cache } from 'cache-manager';
 import { ProductGetDTO } from '../../application/dtos/productsGet.dto';
-import { HttpEndpoints } from '../../domain/enums/http.enums';
 
 @Injectable()
 export class ProductRepository {
-  constructor(private readonly httpService: HttpService, @Inject(CACHE_MANAGER) private cacheManager: Cache) {}
+  constructor(
+    private readonly httpService: HttpService,
+    @Inject(CACHE_MANAGER) private cacheManager: Cache,
+    private configService: ConfigService
+  ) {}
   private logger = new Logger(ProductRepository.name);
 
   async getProductPrice(productId: string): Promise<ProductGetDTO | null> {
-    const product = await this.cacheManager.get(productId);
+    const API = this.configService.get('MELI_API');
+    const productFromCache = await this.cacheManager.get(productId);
 
-    if (product) return product as ProductGetDTO;
+    if (productFromCache) return productFromCache as ProductGetDTO;
 
-    const uri = encodeURI(HttpEndpoints.MELI_API + productId);
-    const { data, status } = await this.httpService.get(uri).toPromise();
+    try {
+      const { data, status } = await this.httpService.get(encodeURI(API + productId)).toPromise();
 
-    if (status === HttpStatus.OK) {
-      try {
+      if (status === HttpStatus.OK) {
         await this.cacheManager.set(productId, new ProductGetDTO(data), { ttl: 1000 * 60 * 60 });
-      } catch (error) {
-        this.logger.error(error);
+        return new ProductGetDTO(data);
       }
-      return new ProductGetDTO(data);
+    } catch (error) {
+      this.logger.error(error);
     }
 
     return null;

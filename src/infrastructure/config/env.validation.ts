@@ -9,6 +9,9 @@ class EnvironmentVariables {
   REDIS_HOST: string;
   @IsNotEmpty()
   REDIS_PORT: string;
+
+  @IsNotEmpty()
+  MELI_API: string;
 }
 
 export function validate(config: Record<string, unknown>): EnvironmentVariables {

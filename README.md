@@ -131,6 +131,8 @@ http://meli-coupon-app-loadbalancer-2084293797.us-east-2.elb.amazonaws.com
 |[Dotenv]()|Cargar variables de entorno
 |[Dotenv-flow](https://www.npmjs.com/package/dotenv-flow) / [Dotenv-expand](https://www.npmjs.com/package/dotenv-expand)| Utilizar archivos .env según entorno
 |[class-transformer]() / [class-validator]()| Validar propiedades de clases
+|[helmet](https://github.com/helmetjs/helmet)| Asegurar encabezados HTTP
+|[cors](https://github.com/expressjs/cors)| Implementar CORS
 
 # Test Coverage
 ```sh
