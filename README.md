@@ -79,15 +79,20 @@ docker-compose up -d
 
 \* Por defecto la aplicación se ejecuta en el puerto `5000`
 ```
-http://localhost:5000/coupons
+http://localhost:5000/coupon
 ```
 \* Dentro de la carpeta **Utils** se encuentra el archivo **request.json** con un body válido que se puede utilizar para probar la aplicación con productos reales.
 
 ## Usabilidad
 
+**Enlace a la aplicación**
+```
+http://meli-coupon-app-loadbalancer-2084293797.us-east-2.elb.amazonaws.com
+```
+
 | Método | Endpoint | descripción |
 |--|--|--|
-|POST|/coupons| Obtener productos disponibles según monto del cupón
+|POST|/coupon| Obtener productos disponibles según monto del cupón
 
 **Esquema de body**
 ```sh
